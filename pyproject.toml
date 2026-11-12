@@ -1,0 +1,12 @@
+[project]
+name = "wiki-sandbox"
+version = "0.1.0"
+description = "Personal academic and engineering website built with Zensical"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "zensical>=0.1.0",
+]

@@ -1,0 +1,19 @@
+{#-
+  Projects page: the Markdown body of the page, followed by the `projects`
+  list from its front matter (see docs/projects/index.md). Entries are shown
+  in the order they are written.
+-#}
+{% extends "page.html" %}
+{% import "partials/portfolio.html" as pf with context %}
+
+{% block content %}
+  {{ super() }}
+  {% set projects = page.meta.projects or [] %}
+  {% if projects %}
+    <div class="pf-list">
+      {% for p in projects %}{{ pf.project(p, 2) }}{% endfor %}
+    </div>
+  {% else %}
+    <p class="pf-empty">No projects listed yet.</p>
+  {% endif %}
+{% endblock %}

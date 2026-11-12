@@ -1,0 +1,818 @@
+/* ==========================================================================
+   Site stylesheet
+   --------------------------------------------------------------------------
+   1. Design tokens (light / dark)    -> change colors and fonts here
+   2. Base typography (all pages)
+   3. Header
+   4. Footer
+   5. Portfolio pages (.pf): home, projects, publications, CV
+   6. Notes (documentation layout)
+   7. Small screens
+
+   Note: in this theme 1rem = 20px (html font-size 125%). Portfolio sizes are
+   given in em relative to the 16px body text.
+   ========================================================================== */
+
+/* 1. Design tokens ------------------------------------------------------- */
+
+:root {
+  --pf-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+    "Hiragino Sans", "Noto Sans JP", "Helvetica Neue", Arial, sans-serif;
+  --pf-font-serif: "Iowan Old Style", "Palatino Linotype", Palatino,
+    "Book Antiqua", Georgia, "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --pf-font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas,
+    monospace;
+
+  --md-text-font: var(--pf-font-sans);
+  --md-code-font: var(--pf-font-mono);
+
+  --pf-measure: 36rem; /* width of portfolio pages (~720px) */
+}
+
+:root,
+[data-md-color-scheme="default"] {
+  --pf-bg: #fcfcfb;
+  --pf-fg: #1c1d20;
+  --pf-fg-2: #4f5158; /* secondary text */
+  --pf-fg-3: #7d7f86; /* muted text, dates */
+  --pf-line: #e6e5e1; /* separators */
+  --pf-accent: #2c5a85; /* links */
+  --pf-accent-2: #1b3f63; /* link hover */
+  --pf-code-bg: #f3f3f1;
+}
+
+[data-md-color-scheme="slate"] {
+  --pf-bg: #141517;
+  --pf-fg: #e4e4e1;
+  --pf-fg-2: #a9abb0;
+  --pf-fg-3: #7f8187;
+  --pf-line: #2a2b2f;
+  --pf-accent: #8fb4d8;
+  --pf-accent-2: #b5cfe8;
+  --pf-code-bg: #1c1d20;
+}
+
+/* Map tokens onto the theme's variables (both schemes) */
+:root,
+[data-md-color-scheme="default"],
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: var(--pf-bg);
+  --md-default-bg-color--light: var(--pf-bg);
+  --md-default-fg-color: var(--pf-fg);
+  --md-default-fg-color--light: var(--pf-fg-2);
+  --md-default-fg-color--lighter: var(--pf-fg-3);
+  --md-default-fg-color--lightest: var(--pf-line);
+  --md-typeset-color: var(--pf-fg);
+  --md-typeset-a-color: var(--pf-accent);
+  --md-primary-fg-color: var(--pf-accent);
+  --md-primary-fg-color--light: var(--pf-accent);
+  --md-primary-fg-color--dark: var(--pf-accent-2);
+  --md-primary-bg-color: var(--pf-bg);
+  --md-accent-fg-color: var(--pf-accent-2);
+  --md-accent-fg-color--transparent: color-mix(in srgb, var(--pf-accent) 10%, transparent);
+  --md-code-bg-color: var(--pf-code-bg);
+  --md-footer-bg-color: var(--pf-bg);
+  --md-footer-fg-color: var(--pf-fg-2);
+}
+
+/* 2. Base typography ------------------------------------------------------ */
+
+body {
+  font-family: var(--pf-font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.md-typeset {
+  font-size: 0.8rem; /* 16px */
+  line-height: 1.65;
+  letter-spacing: 0;
+}
+
+.md-typeset h1 {
+  font-family: var(--pf-font-serif);
+  font-size: 1.9em;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.8em;
+}
+
+.md-typeset h2 {
+  font-size: 1.3em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 1.8em 0 0.6em;
+}
+
+.md-typeset h3 {
+  font-size: 1.08em;
+  font-weight: 600;
+  margin: 1.5em 0 0.5em;
+}
+
+/* Prose links: faint underline that darkens on hover */
+.md-typeset a {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+  text-underline-offset: 0.2em;
+}
+
+.md-typeset a:hover {
+  text-decoration-color: currentColor;
+}
+
+/* Navigational links (link rows, titles, lists): no underline until hover */
+.md-typeset .pf-links a,
+.md-typeset .pf-item__title a,
+.md-typeset .pf-section__head a,
+.md-typeset .pf-notes a,
+.md-typeset .pf-pub__title a,
+.md-typeset .pf-back a,
+.md-typeset .pf-intro__affil a,
+.md-typeset .headerlink {
+  text-decoration-color: transparent;
+}
+
+.md-typeset .pf-links a:hover,
+.md-typeset .pf-item__title a:hover,
+.md-typeset .pf-section__head a:hover,
+.md-typeset .pf-notes a:hover,
+.md-typeset .pf-pub__title a:hover,
+.md-typeset .pf-back a:hover,
+.md-typeset .pf-intro__affil a:hover {
+  text-decoration-color: currentColor;
+}
+
+.md-typeset :focus-visible,
+.site-header :focus-visible,
+.site-footer :focus-visible {
+  outline: 2px solid var(--pf-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.md-typeset hr {
+  border-bottom-color: var(--pf-line);
+}
+
+/* 3. Header --------------------------------------------------------------- */
+
+.md-header.site-header {
+  background-color: var(--pf-bg);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  border-bottom: 1px solid var(--pf-line);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0 0.6rem 0 0.8rem;
+  min-height: 2.6rem;
+}
+
+.site-header__name {
+  font-family: var(--pf-font-serif);
+  font-size: 0.95rem;
+  color: var(--pf-fg);
+  white-space: nowrap;
+  margin-right: 1.2rem;
+}
+
+.site-header__name:hover {
+  color: var(--pf-accent);
+}
+
+.site-header__links {
+  display: flex;
+  gap: 1.15rem;
+  margin: 0 0 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.site-header__links a {
+  display: block;
+  padding: 0.25rem 0;
+  font-size: 0.7rem; /* 14px */
+  color: var(--pf-fg-2);
+  border-bottom: 1px solid transparent;
+}
+
+.site-header__links a:hover {
+  color: var(--pf-fg);
+}
+
+.site-header__links a.is-active {
+  color: var(--pf-fg);
+  border-bottom-color: var(--pf-accent);
+}
+
+.site-header__tools {
+  display: flex;
+  align-items: center;
+  margin-left: 0.6rem;
+}
+
+.site-header__tools .md-header__button {
+  margin: 0;
+  padding: 0.35rem;
+  color: var(--pf-fg-2);
+}
+
+.site-header__tools .md-header__button:hover {
+  color: var(--pf-fg);
+  opacity: 1;
+}
+
+.site-header .md-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.site-header__drawer {
+  margin: 0 0.3rem 0 -0.4rem;
+  padding: 0.35rem;
+}
+
+/* 4. Footer --------------------------------------------------------------- */
+
+.md-footer.site-footer {
+  border-top: 1px solid var(--pf-line);
+  background: var(--pf-bg);
+  color: var(--pf-fg-3);
+}
+
+.site-footer__pager {
+  display: flex;
+  gap: 1rem;
+  padding: 0.8rem 0.8rem 0;
+}
+
+.site-footer__pager a {
+  display: flex;
+  flex-direction: column;
+  max-width: 48%;
+  color: var(--pf-fg);
+  font-size: 0.7rem;
+}
+
+.site-footer__pager a:hover .site-footer__title {
+  color: var(--pf-accent);
+}
+
+.site-footer__next {
+  margin-left: auto;
+  text-align: right;
+}
+
+.site-footer__dir {
+  font-size: 0.6rem;
+  color: var(--pf-fg-3);
+}
+
+.site-footer__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.4rem 1rem;
+  padding: 0.8rem;
+  font-size: 0.65rem;
+}
+
+.site-footer__links {
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer a {
+  color: var(--pf-fg-2);
+}
+
+.site-footer__links a:hover {
+  color: var(--pf-accent);
+}
+
+/* 5. Portfolio pages ------------------------------------------------------ */
+
+.md-main__inner:has(> .pf) {
+  margin-top: 1.4rem;
+}
+
+.pf > .md-content__inner {
+  max-width: var(--pf-measure);
+  margin-bottom: 2.4rem;
+}
+
+/* Hide heading permalink anchors on portfolio pages */
+.pf .headerlink {
+  display: none;
+}
+
+/* Section labels: small, uppercase, hairline below */
+.pf .md-typeset h2:not([class]),
+.pf .md-typeset .pf-section__head h2 {
+  font-family: var(--pf-font-sans);
+  font-size: 0.75em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pf-fg-3);
+  line-height: 1.4;
+  margin: 2.2em 0 0.9em;
+  padding-bottom: 0.55em;
+  border-bottom: 1px solid var(--pf-line);
+}
+
+/* Section head row: label on the left, "All … →" link on the right */
+.md-typeset .pf-section__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1em;
+  margin: 2.2em 0 0.2em;
+  padding-bottom: 0.55em;
+  border-bottom: 1px solid var(--pf-line);
+}
+
+.pf .md-typeset .pf-section__head h2 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.pf-section__head a {
+  font-size: 0.85em;
+  white-space: nowrap;
+}
+
+.md-typeset .pf-subtitle,
+.md-typeset .pf-back {
+  color: var(--pf-fg-3);
+  font-size: 0.9em;
+}
+
+.md-typeset .pf-subtitle {
+  margin: -0.4em 0 1.6em;
+}
+
+.md-typeset .pf-back {
+  margin: 0 0 1em;
+}
+
+.md-typeset .pf-empty {
+  color: var(--pf-fg-3);
+}
+
+/* Compact lists on portfolio pages */
+.pf .md-typeset ul:not([class]) li {
+  margin-bottom: 0.25em;
+}
+
+/* --- Home: intro block --- */
+
+.pf-intro {
+  display: grid;
+  gap: 1.4em;
+  margin-bottom: 1.4em;
+}
+
+.pf-intro--photo {
+  grid-template-columns: 1fr 7.5em;
+  align-items: start;
+}
+
+.pf-intro__photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+.md-typeset .pf-intro__name {
+  margin: 0 0 0.25em;
+  font-size: 2.1em;
+}
+
+.md-typeset .pf-intro__role,
+.md-typeset .pf-intro__affil {
+  margin: 0;
+}
+
+.md-typeset .pf-intro__role {
+  font-size: 1.05em;
+}
+
+.md-typeset .pf-intro__affil {
+  color: var(--pf-fg-2);
+}
+
+.md-typeset .pf-intro__affil a {
+  color: inherit;
+}
+
+.md-typeset .pf-intro .pf-links {
+  display: flex;
+  margin-top: 0.7em;
+  font-size: 0.95em;
+}
+
+/* --- Inline link rows (projects, publications, intro) --- */
+
+.md-typeset .pf-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0 1em;
+}
+
+.md-typeset .pf-links a {
+  white-space: nowrap;
+}
+
+/* Icon links (social profiles): muted glyphs that take the accent on hover */
+.md-typeset .pf-links {
+  align-items: center;
+}
+
+.pf-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pf-fg-2);
+}
+
+.md-typeset .pf-links a.pf-icon-link,
+.site-footer a.pf-icon-link {
+  color: var(--pf-fg-2);
+}
+
+.md-typeset .pf-links a.pf-icon-link:hover,
+.site-footer a.pf-icon-link:hover {
+  color: var(--pf-accent);
+}
+
+.pf-icon-link svg {
+  width: 1.15em;
+  height: 1.15em;
+  fill: currentColor;
+}
+
+.site-footer .pf-icon-link svg {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+/* --- Project entries --- */
+
+.pf-list {
+  margin-top: 0.4em;
+}
+
+.pf-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1em;
+  padding: 1em 0;
+}
+
+.pf-item + .pf-item {
+  border-top: 1px solid var(--pf-line);
+}
+
+.pf-item--thumb {
+  grid-template-columns: 8.5em 1fr;
+}
+
+.pf-item__thumb {
+  display: block;
+  align-self: start;
+  margin-top: 0.25em;
+}
+
+.pf-item__thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid var(--pf-line);
+}
+
+.pf-item__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0 1em;
+}
+
+.md-typeset .pf-item__title {
+  margin: 0;
+  font-family: var(--pf-font-sans);
+  font-size: 1.02em;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--pf-fg);
+  border: 0;
+  padding: 0;
+}
+
+.md-typeset .pf-item__title a {
+  color: inherit;
+}
+
+.md-typeset .pf-item__title a:hover {
+  color: var(--pf-accent);
+}
+
+.pf-item__date {
+  font-size: 0.85em;
+  color: var(--pf-fg-3);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.md-typeset .pf-item__summary {
+  margin: 0.25em 0 0.4em;
+  color: var(--pf-fg-2);
+}
+
+.pf-item__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2em 1.4em;
+  font-size: 0.85em;
+}
+
+.md-typeset ul.pf-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--pf-fg-3);
+}
+
+.md-typeset ul.pf-tags li {
+  margin: 0;
+}
+
+.md-typeset ul.pf-tags li + li::before {
+  content: "·";
+  padding: 0 0.45em;
+}
+
+/* --- Recent notes --- */
+
+.md-typeset ul.pf-notes {
+  margin: 0.6em 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.md-typeset ul.pf-notes li {
+  display: grid;
+  grid-template-columns: 6.5em 1fr;
+  gap: 1em;
+  margin: 0 0 0.35em;
+}
+
+.pf-notes time {
+  color: var(--pf-fg-3);
+  font-size: 0.9em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Publications (year in a left gutter) --- */
+
+.pf-year {
+  display: grid;
+  grid-template-columns: 4em 1fr;
+  gap: 1em;
+  padding: 1em 0;
+  border-top: 1px solid var(--pf-line);
+}
+
+.md-typeset .pf-year__label {
+  margin: 0;
+  font-size: 1em;
+  font-weight: 600;
+  color: var(--pf-fg-3);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+  border: 0;
+  padding: 0;
+  text-transform: none;
+}
+
+.md-typeset ol.pf-pubs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.md-typeset ol.pf-pubs li.pf-pub {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 1em;
+}
+
+.md-typeset ol.pf-pubs li.pf-pub:last-child {
+  margin-bottom: 0;
+}
+
+.pf-pub__title {
+  font-weight: 600;
+}
+
+.md-typeset .pf-pub__title a {
+  color: var(--pf-fg);
+}
+
+.md-typeset .pf-pub__title a:hover {
+  color: var(--pf-accent);
+}
+
+.pf-pub__authors,
+.pf-pub__venue {
+  color: var(--pf-fg-2);
+}
+
+.pf-pub__authors strong {
+  color: var(--pf-fg);
+  font-weight: 600;
+}
+
+.pf-pub__note {
+  margin-left: 0.6em;
+  font-size: 0.85em;
+  color: var(--pf-fg-3);
+}
+
+.pf-pub .pf-links {
+  font-size: 0.85em;
+}
+
+/* --- CV: definition lists render as "date | entry" rows --- */
+
+.pf .md-typeset dl {
+  display: grid;
+  grid-template-columns: 8.5em 1fr;
+  gap: 0.15em 1.2em;
+  margin: 0;
+}
+
+.pf .md-typeset dt {
+  color: var(--pf-fg-3);
+  font-size: 0.92em;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  padding-top: 0.08em;
+}
+
+.pf .md-typeset dd {
+  margin: 0 0 0.7em;
+}
+
+.pf .md-typeset dd p {
+  margin: 0;
+}
+
+/* A bold phrase at the start of an entry acts as its title line */
+.pf .md-typeset dd > strong:first-child,
+.pf .md-typeset dd > p:first-child > strong:first-child {
+  display: block;
+  font-weight: 600;
+}
+
+/* 6. Notes (documentation layout) ---------------------------------------- */
+
+.md-nav {
+  font-size: 0.68rem;
+}
+
+.md-nav__title {
+  color: var(--pf-fg-3);
+}
+
+.md-nav__link--active,
+.md-nav__item .md-nav__link--active {
+  color: var(--pf-accent);
+}
+
+.md-typeset code,
+.md-typeset pre > code {
+  font-size: 0.85em;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  font-size: 0.9em;
+  box-shadow: none;
+}
+
+.md-typeset table:not([class]) {
+  font-size: 0.9em;
+  box-shadow: none;
+  border: 1px solid var(--pf-line);
+}
+
+.md-typeset img {
+  border-radius: 3px;
+}
+
+/* Display math: tighter spacing, scroll instead of overflowing on phones */
+.md-typeset div.arithmatex {
+  margin-top: 0.9em;
+  margin-bottom: 0.9em;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.md-typeset div.arithmatex .katex-display {
+  margin: 0;
+  padding: 0.2em 0;
+}
+
+/* Hide the theme's "back to top" pill shadow for a flatter look */
+.md-top {
+  box-shadow: none;
+  border: 1px solid var(--pf-line);
+}
+
+/* 7. Small screens -------------------------------------------------------- */
+
+@media screen and (max-width: 44.9375em) {
+  /* Header: name on the first row, section links on a second row */
+  .md-header.site-header {
+    position: relative;
+  }
+
+  .site-header__inner {
+    flex-wrap: wrap;
+    padding: 0.35rem 0.4rem 0 0.8rem;
+  }
+
+  .site-header__name {
+    margin-right: auto;
+  }
+
+  .site-header__links {
+    order: 3;
+    flex-basis: 100%;
+    flex-wrap: wrap;
+    gap: 0 1rem;
+    margin: 0;
+    padding: 0.1rem 0 0.25rem;
+  }
+
+  .site-header__tools {
+    margin-left: 0;
+  }
+
+  .pf-item--thumb {
+    grid-template-columns: 5.5em 1fr;
+    gap: 0.9em;
+  }
+
+  .pf-intro--photo {
+    grid-template-columns: 1fr 5.5em;
+  }
+
+  .pf-year {
+    grid-template-columns: 1fr;
+    gap: 0.4em;
+  }
+
+  .pf .md-typeset dl {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .pf .md-typeset dd {
+    margin-bottom: 0.9em;
+  }
+}
+
+@media screen and (max-width: 22em) {
+  .site-header__links {
+    gap: 0 0.7rem;
+  }
+}
+
+@media print {
+  .site-header,
+  .site-footer {
+    display: none;
+  }
+}

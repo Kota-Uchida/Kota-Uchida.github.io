@@ -1,0 +1,24 @@
+{#-
+  Publications page: the Markdown body of the page, followed by the
+  `publications` list from its front matter (see docs/publications.md),
+  grouped by year, newest first.
+-#}
+{% extends "page.html" %}
+{% import "partials/portfolio.html" as pf with context %}
+
+{% block content %}
+  {{ super() }}
+  {% set pubs = page.meta.publications or [] %}
+  {% if pubs %}
+    {% for group in pubs | groupby("year") | reverse %}
+      <section class="pf-year" aria-labelledby="year-{{ group.grouper }}">
+        <h2 class="pf-year__label" id="year-{{ group.grouper }}">{{ group.grouper | d('Undated', true) }}</h2>
+        <ol class="pf-pubs">
+          {% for p in group.list %}{{ pf.publication(p, page.meta.highlight_author) }}{% endfor %}
+        </ol>
+      </section>
+    {% endfor %}
+  {% else %}
+    <p class="pf-empty">{{ page.meta.empty_message | d("No publications yet.", true) | e }}</p>
+  {% endif %}
+{% endblock %}

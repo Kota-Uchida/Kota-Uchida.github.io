@@ -1,0 +1,87 @@
+{#-
+  Home page. Everything shown here comes from docs/index.md:
+
+    - name, role, affiliation, photo, links  -> front matter of docs/index.md
+    - introduction and research interests    -> Markdown body of docs/index.md
+    - selected projects -> entries with `selected: true` in docs/projects/index.md
+    - recent notes      -> pages under notes/ that have a `date` in front matter
+-#}
+{% extends "page.html" %}
+{% import "partials/portfolio.html" as pf with context %}
+
+{% block htmltitle %}
+  <title>{{ config.site_name | e }}</title>
+{% endblock %}
+
+{% block content %}
+  {% set m = page.meta %}
+
+  {#- Collect data from other pages through the navigation tree. -#}
+  {% set ns = namespace(projects=[], projects_url=none, notes=[], notes_url=none) %}
+  {% set notes_prefix = m.notes_section | d("notes/", true) %}
+  {% for item in nav.items recursive %}
+    {% if item.meta and item.meta.projects %}
+      {% set ns.projects = item.meta.projects %}
+      {% set ns.projects_url = item.url %}
+    {% endif %}
+    {% if item.url and item.url[:notes_prefix | length] == notes_prefix %}
+      {% if item.is_index or item.url == notes_prefix %}
+        {% set ns.notes_url = item.url %}
+      {% elif item.meta and item.meta.date %}
+        {% set ns.notes = ns.notes + [item] %}
+      {% endif %}
+    {% endif %}
+    {% if item.children %}{{ loop(item.children) }}{% endif %}
+  {% endfor %}
+
+  <header class="pf-intro{{ ' pf-intro--photo' if m.photo else '' }}">
+    <div class="pf-intro__text">
+      <h1 class="pf-intro__name">{{ m.name | d(config.site_name, true) | e }}</h1>
+      {% if m.role %}<p class="pf-intro__role">{{ m.role | e }}</p>{% endif %}
+      {% if m.affiliation %}
+        <p class="pf-intro__affil">
+          {%- if m.affiliation_url %}<a href="{{ m.affiliation_url | e }}">{{ m.affiliation | e }}</a>
+          {%- else %}{{ m.affiliation | e }}{% endif -%}
+        </p>
+      {% endif %}
+      {{ pf.link_list(m.links) }}
+    </div>
+    {% if m.photo %}
+      <img class="pf-intro__photo" src="{{ pf.href(m.photo) }}"
+           alt="{{ m.name | d(config.site_name, true) | e }}" width="240" height="300">
+    {% endif %}
+  </header>
+
+  {{ page.content }}
+
+  {% set selected = ns.projects | selectattr("selected") | list %}
+  {% if m.selected_projects != false and selected %}
+    <section class="pf-section" aria-labelledby="selected-projects">
+      <div class="pf-section__head">
+        <h2 id="selected-projects">Selected projects</h2>
+        {% if ns.projects_url %}<a href="{{ ns.projects_url | url }}">All projects →</a>{% endif %}
+      </div>
+      <div class="pf-list">
+        {% for p in selected %}{{ pf.project(p) }}{% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  {% set n_notes = m.recent_notes | d(3, true) %}
+  {% if m.recent_notes != false and ns.notes %}
+    <section class="pf-section" aria-labelledby="recent-notes">
+      <div class="pf-section__head">
+        <h2 id="recent-notes">Recent notes</h2>
+        {% if ns.notes_url %}<a href="{{ ns.notes_url | url }}">All notes →</a>{% endif %}
+      </div>
+      <ul class="pf-notes">
+        {% for n in (ns.notes | sort(attribute="meta.date", reverse=true))[:n_notes] %}
+          <li>
+            <time datetime="{{ n.meta.date }}">{{ n.meta.date }}</time>
+            <a href="{{ n.url | url }}">{{ n.title | e }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+{% endblock %}

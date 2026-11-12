@@ -1,0 +1,155 @@
+# =============================================================================
+# Site configuration
+#
+# Most personal content lives in Markdown files under docs/. This file only
+# holds site-wide settings: the site name, the URL, the navigation, and theme
+# options. See README.md for a walkthrough.
+# =============================================================================
+
+[project]
+site_name = "Kota Uchida"
+site_description = "Undergraduate student majoring robotics at the University of Tokyo."
+site_author = "Kota Uchida"
+
+# Full public URL of the site, including the repository subpath when the site
+# is served from https://<user>.github.io/<repo>/. Keep the trailing slash.
+site_url = "https://your-username.github.io/your-repo/"
+
+copyright = "© 2026 Kota Uchida"
+
+# Top-level entries become the links in the top navigation bar.
+# Sub-pages listed under a section appear in that section's sidebar (Notes)
+# and keep the section highlighted in the top bar.
+nav = [
+  { "Home" = "index.md" },
+  { "Projects" = [
+    "projects/index.md",
+    "projects/autonomous-underwater-vehicle.md",
+    "projects/fsi-simulation.md",
+  ] },
+  { "Publications" = "publications.md" },
+  { "Notes" = [
+    "notes/index.md",
+    { "Dynamics" = [
+      "notes/dynamics/rotation-representations.md",
+    ] },
+    { "Simulation" = [
+      "notes/simulation/ode-integrators.md",
+    ] },
+    { "Guides" = [
+      "notes/guides/writing-notes.md",
+    ] },
+  ] },
+  { "CV" = "cv.md" },
+]
+
+extra_css = ["stylesheets/site.css"]
+
+[project.theme]
+custom_dir = "overrides"
+language = "en"
+favicon = "assets/images/favicon.svg"
+
+# Use the system font stack (defined in site.css) instead of web fonts:
+# no third-party requests and no font download on first visit.
+font = false
+
+features = [
+  "content.code.copy",
+  "content.footnote.tooltips",
+  "content.tabs.link",
+  "content.tooltips",
+  "navigation.footer",      # previous/next links (Notes only; see footer.html)
+  "navigation.indexes",     # section index pages (projects/index.md, ...)
+  "navigation.sections",
+  "navigation.tabs",        # top-level sections; rendered inline in the header
+  "navigation.top",
+  "navigation.tracking",
+  "search.highlight",
+  "toc.follow",
+]
+
+[project.theme.icon]
+menu = "lucide/menu"
+search = "lucide/search"
+
+# Light / dark mode. The first entry follows the operating system setting.
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+primary = "custom"
+accent = "custom"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Switch to light mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+primary = "custom"
+accent = "custom"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+primary = "custom"
+accent = "custom"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to system preference"
+
+# Links shown as icons in the footer of every page. Icon names:
+# https://zensical.org/docs/authoring/icons-emojis/ (fontawesome/brands/...)
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/your-username"
+name = "GitHub"
+
+[[project.extra.social]]
+icon = "fontawesome/regular/envelope"
+link = "mailto:you@example.com"
+name = "Email"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/linkedin"
+link = "https://www.linkedin.com/in/your-username"
+name = "LinkedIn"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/instagram"
+link = "https://www.instagram.com/your-username"
+name = "Instagram"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/x-twitter"
+link = "https://x.com/your-username"
+name = "X"
+
+[project.markdown_extensions]
+abbr = {}
+admonition = {}
+attr_list = {}
+def_list = {}
+footnotes = {}
+md_in_html = {}
+toc.permalink = true
+pymdownx.arithmatex.generic = true
+pymdownx.betterem = {}
+pymdownx.caret = {}
+pymdownx.details = {}
+pymdownx.emoji.emoji_generator = "zensical.extensions.emoji.to_svg"
+pymdownx.emoji.emoji_index = "zensical.extensions.emoji.twemoji"
+pymdownx.highlight.anchor_linenums = true
+pymdownx.highlight.line_spans = "__span"
+pymdownx.highlight.pygments_lang_class = true
+pymdownx.inlinehilite = {}
+pymdownx.keys = {}
+pymdownx.magiclink = {}
+pymdownx.mark = {}
+pymdownx.smartsymbols = {}
+pymdownx.superfences.custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
+pymdownx.tabbed.alternate_style = true
+pymdownx.tabbed.combine_header_slug = true
+pymdownx.tasklist.custom_checkbox = true
+pymdownx.tilde = {}

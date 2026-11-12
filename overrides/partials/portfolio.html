@@ -1,0 +1,108 @@
+{#-
+  Shared macros for the portfolio pages (home, projects, publications).
+  Import with:  {% import "partials/portfolio.html" as pf with context %}
+
+  Content never lives here: entries come from the front matter of the
+  Markdown pages in docs/.
+-#}
+
+{#-
+  Resolve a link written in front matter.
+    - "https://...", "mailto:..."  -> used as-is
+    - "#anchor"                     -> used as-is
+    - "projects/auv.md", "cv.md"    -> site page (".md" is optional)
+    - "assets/cv.pdf"               -> file in docs/
+-#}
+{% macro href(u) -%}
+  {%- set u = u | string -%}
+  {%- if ":" in u or u[:1] == "#" -%}{{ u | e }}
+  {%- else -%}{{ u | replace("index.md", "") | replace(".md", "/") | url }}
+  {%- endif -%}
+{%- endmacro %}
+
+{#-
+  A row of small links: [{label, url, icon?}, ...]
+  With `icon` (e.g. "fontawesome/brands/github") the link is shown as an
+  icon; the label is kept as its accessible name and tooltip.
+-#}
+{% macro link_list(items, page=none) -%}
+  {%- if items or page -%}
+    <span class="pf-links">
+      {%- if page %}<a href="{{ href(page) }}">Details</a>{% endif -%}
+      {%- for l in items or [] -%}
+        {%- if l.icon -%}
+          <a class="pf-icon-link" href="{{ href(l.url) }}" title="{{ l.label | e }}" aria-label="{{ l.label | e }}">
+            {%- include ".icons/" ~ l.icon ~ ".svg" -%}
+          </a>
+        {%- else -%}
+          <a href="{{ href(l.url) }}">{{ l.label | e }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </span>
+  {%- endif -%}
+{%- endmacro %}
+
+{#- One project entry. `level` sets the heading level of the title. -#}
+{% macro project(p, level=3) %}
+  {% set target = p.page or (p.links[0].url if p.links else none) %}
+  <article class="pf-item{{ ' pf-item--thumb' if p.thumbnail else '' }}">
+    {% if p.thumbnail %}
+      {% if target %}
+        <a class="pf-item__thumb" href="{{ href(target) }}" tabindex="-1" aria-hidden="true">
+      {% else %}
+        <div class="pf-item__thumb">
+      {% endif %}
+          <img src="{{ href(p.thumbnail) }}" alt="{{ p.thumbnail_alt | d('', true) | e }}"
+               width="320" height="200" loading="lazy" decoding="async">
+      {% if target %}</a>{% else %}</div>{% endif %}
+    {% endif %}
+    <div class="pf-item__body">
+      <div class="pf-item__head">
+        <h{{ level }} class="pf-item__title">
+          {%- if target %}<a href="{{ href(target) }}">{{ p.title | e }}</a>
+          {%- else %}{{ p.title | e }}{% endif -%}
+        </h{{ level }}>
+        {% if p.period %}<span class="pf-item__date">{{ p.period | e }}</span>{% endif %}
+      </div>
+      {% if p.summary %}<p class="pf-item__summary">{{ p.summary | e }}</p>{% endif %}
+      {% if p.tags or p.links or p.page %}
+        <div class="pf-item__meta">
+          {% if p.tags %}
+            <ul class="pf-tags" aria-label="Topics">
+              {% for t in p.tags %}<li>{{ t | e }}</li>{% endfor %}
+            </ul>
+          {% endif %}
+          {{ link_list(p.links, p.page) }}
+        </div>
+      {% endif %}
+    </div>
+  </article>
+{% endmacro %}
+
+{#- Authors as a list or a string; `me` is printed in bold. -#}
+{% macro authors(a, me) -%}
+  {%- if a is string -%}
+    {%- if me %}{{ a | e | replace(me | e, "<strong>" ~ (me | e) ~ "</strong>") }}{% else %}{{ a | e }}{% endif -%}
+  {%- else -%}
+    {%- for name in a -%}
+      {%- if me and name == me %}<strong>{{ name | e }}</strong>{% else %}{{ name | e }}{% endif -%}
+      {{- ", " if not loop.last -}}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endmacro %}
+
+{#- One publication entry. -#}
+{% macro publication(p, me=none) %}
+  <li class="pf-pub">
+    <span class="pf-pub__title">
+      {%- if p.url %}<a href="{{ href(p.url) }}">{{ p.title | e }}</a>{% else %}{{ p.title | e }}{% endif -%}
+    </span>
+    {% if p.authors %}<span class="pf-pub__authors">{{ authors(p.authors, me) }}</span>{% endif %}
+    <span class="pf-pub__venue">
+      {%- if p.venue %}<em>{{ p.venue | e }}</em>{% endif -%}
+      {%- if p.venue and p.year %}, {% endif %}{{ p.year | d('', true) }}
+      {%- if p.note %}<span class="pf-pub__note">{{ p.note | e }}</span>{% endif -%}
+    </span>
+    {{ link_list(p.links) }}
+  </li>
+{% endmacro %}

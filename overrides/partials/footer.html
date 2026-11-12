@@ -1,0 +1,48 @@
+{#-
+  Minimal footer. Previous/next links are shown only on documentation-style
+  pages (Notes); portfolio pages get just the copyright line and links.
+  Links come from [[project.extra.social]] in zensical.toml.
+-#}
+{% set is_portfolio = page and page.meta and page.meta.template %}
+
+<footer class="md-footer site-footer">
+
+  {% if "navigation.footer" in features and not is_portfolio %}
+    {% if page.previous_page or page.next_page %}
+      {% if page.meta and page.meta.hide %}
+        {% set hidden = "hidden" if "footer" in page.meta.hide %}
+      {% endif %}
+      <nav class="md-grid site-footer__pager" aria-label="{{ lang.t('footer') }}" {{ hidden }}>
+        {% if page.previous_page %}
+          <a href="{{ page.previous_page.url | url }}" class="site-footer__prev" rel="prev">
+            <span class="site-footer__dir">{{ lang.t("footer.previous") }}</span>
+            <span class="site-footer__title">{{ page.previous_page.title | e }}</span>
+          </a>
+        {% endif %}
+        {% if page.next_page %}
+          <a href="{{ page.next_page.url | url }}" class="site-footer__next" rel="next">
+            <span class="site-footer__dir">{{ lang.t("footer.next") }}</span>
+            <span class="site-footer__title">{{ page.next_page.title | e }}</span>
+          </a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  {% endif %}
+
+  <div class="md-grid site-footer__meta">
+    <span>{{ config.copyright | d("", true) }}</span>
+    {% if config.extra.social %}
+      <ul class="site-footer__links">
+        {% for social in config.extra.social %}
+          {% set label = social.name | d(social.link, true) | e %}
+          <li>
+            <a class="pf-icon-link" href="{{ social.link }}" title="{{ label }}" aria-label="{{ label }}"
+               {%- if social.link[:4] == "http" %} rel="me noopener"{% endif %}>
+              {%- if social.icon %}{% include ".icons/" ~ social.icon ~ ".svg" %}{% else %}{{ label }}{% endif -%}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</footer>

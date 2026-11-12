@@ -1,0 +1,28 @@
+{#-
+  Single-column portfolio page: no sidebars, narrow reading width.
+  Use it from any Markdown page with:
+
+    ---
+    template: page.html
+    ---
+
+  home.html, projects.html and publications.html extend this layout.
+-#}
+{% extends "main.html" %}
+
+{% block site_nav %}{% endblock %}
+
+{% block container %}
+  <div class="md-content pf" data-md-component="content">
+    <article class="md-content__inner md-typeset">
+      <a id="__skip" tabindex="-1"></a>
+      {% block content %}
+        {% if page.meta and page.meta.back %}
+          {% import "partials/portfolio.html" as pf with context %}
+          <p class="pf-back"><a href="{{ pf.href(page.meta.back.url) }}">← {{ page.meta.back.label | e }}</a></p>
+        {% endif %}
+        {{ super() }}
+      {% endblock %}
+    </article>
+  </div>
+{% endblock %}

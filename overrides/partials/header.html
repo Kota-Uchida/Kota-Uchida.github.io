@@ -1,0 +1,66 @@
+{#-
+  Compact single-row header: name on the left, top-level sections on the right,
+  then the light/dark toggle and search.
+
+  Top-level links come from `nav` in zensical.toml, so adding or renaming a
+  section needs no template change. The drawer button (mobile sidebar) is only
+  shown on documentation-style pages such as Notes; portfolio pages (those
+  that set `template:` in their front matter) don't need it.
+-#}
+{% set is_portfolio = page and page.meta and page.meta.template %}
+
+{#- URL of the first page inside a nav item (a section links to its index). -#}
+{% macro first_url(item) -%}
+  {%- if item.children -%}{{ first_url(item.children | first) }}
+  {%- else -%}{{ item.url | url | d('.', true) }}{%- endif -%}
+{%- endmacro %}
+
+<header class="md-header site-header" data-md-component="header">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="{{ lang.t('header') }}">
+
+    {% if not is_portfolio %}
+      <label class="md-header__button md-icon site-header__drawer" for="__drawer">
+        {% set icon = config.theme.icon.menu or "material/menu" %}
+        {% include ".icons/" ~ icon ~ ".svg" %}
+        <span class="md-visually-hidden">{{ lang.t('nav') }}</span>
+      </label>
+    {% endif %}
+
+    <a class="site-header__name"
+       href="{{ config.extra.homepage | d(nav.homepage.url, true) | url | d('.', true) }}">
+      {{- config.site_name | e -}}
+    </a>
+
+    <ul class="site-header__links">
+      {% for item in nav.items %}
+        <li>
+          <a href="{{ first_url(item) }}"
+             {% if item.active %}class="is-active" aria-current="{{ 'true' if item.children else 'page' }}"{% endif %}>
+            {{- item.title | e -}}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <div class="site-header__tools">
+      {% if config.theme.palette and not config.theme.palette is mapping %}
+        {% include "partials/palette.html" %}
+      {% endif %}
+      {% if not config.theme.palette is mapping %}
+        {% include "partials/javascripts/palette.html" %}
+      {% endif %}
+
+      {% if "search" in config.plugins %}
+        {% set search = config.plugins["search"] | attr("config") %}
+        {% if search.enabled %}
+          <label class="md-header__button md-icon" for="__search">
+            {% set icon = config.theme.icon.search or "material/magnify" %}
+            {% include ".icons/" ~ icon ~ ".svg" %}
+            <span class="md-visually-hidden">{{ lang.t('search') }}</span>
+          </label>
+          {% include "partials/search.html" %}
+        {% endif %}
+      {% endif %}
+    </div>
+  </nav>
+</header>
