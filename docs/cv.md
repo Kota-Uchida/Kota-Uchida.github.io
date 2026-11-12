@@ -19,7 +19,11 @@ title: CV
 
 2023 – present
 :   **Faculty of Engineering, The University of Tokyo**
-    Department of Mechano-Informatics
+    Department of Mechano-Informatics, GPA 3.79/4
+
+Sep 2025 - Dec 2025
+:   **MechE, Massachusetts Institute of Technology**
+    Robotic Manipulation (A), Nonlinear Dynanmics (A), Quantum Computation (A)
 
 ## Research experience
 Apr 2026 - present
@@ -28,7 +32,7 @@ Apr 2026 - present
 
 Sep 2025 – Dec 2025
 :   **Marine Robotics Lab, Massachusetts Institute of Technology**
-    Underwater 3D reconstruction aided by foundation model
+    Underwater 3D reconstruction aided by foundation model; supervised by Jongseok Hong, John J. Leonard
 
 ## Projects
 

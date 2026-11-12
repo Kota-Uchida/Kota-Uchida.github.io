@@ -13,7 +13,7 @@ site_author = "Kota Uchida"
 
 # Full public URL of the site, including the repository subpath when the site
 # is served from https://<user>.github.io/<repo>/. Keep the trailing slash.
-site_url = "https://your-username.github.io/your-repo/"
+site_url = "https://Kota-Uchida.github.io/your-repo/"
 
 copyright = "© 2026 Kota Uchida"
 
