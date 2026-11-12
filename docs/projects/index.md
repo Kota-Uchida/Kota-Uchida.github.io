@@ -17,7 +17,7 @@ title: Projects
 
 projects:
   - title: Autonomous Underwater Vehicle
-    period: 2024 – present
+    period: 2026 – present
     summary: >-
       Placeholder entry. A small underwater vehicle used as a testbed for
       depth and heading control, onboard sensing, and embedded software.
@@ -27,7 +27,7 @@ projects:
     selected: true
 
   - title: Fluid–Structure Interaction Simulation
-    period: 2024
+    period: 2026
     summary: >-
       Placeholder entry. Coupled simulation of a flexible body in a viscous
       flow, used to study how passive compliance changes the dynamics of
