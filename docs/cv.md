@@ -17,7 +17,7 @@ title: CV
 
 ## Education
 
-2023 – present
+Apr 2023 – present
 :   **Faculty of Engineering, The University of Tokyo**
     Department of Mechano-Informatics, GPA 3.79/4
 
@@ -34,6 +34,26 @@ Sep 2025 – Dec 2025
 :   **Marine Robotics Lab, Massachusetts Institute of Technology**
     Underwater 3D reconstruction aided by foundation model; supervised by Jongseok Hong, John J. Leonard
 
+2021 - 2022
+:   **SSH (Super Science Highshcool), Nishiyamato Highschool**
+    Investigated the protective effects of prohydrojasmon against root-knot nematodes. Also completed a research internship in a laboratory at Ryukoku University.
+
+## Programs / Awards
+
+Feb 2026 - Mar 2026
+:   **Hongo Tech Garage Spring Founders Program**
+    Developed ROV and ASV prototypes. Raised JPY 300,000 (USD 1,800) in funding.
+
+Aug 2026 - Feb 2027
+:   **IPA MITOU Advanced project**
+    Developed multi-AUV operation system (including hardware, software, and acoustic simulation). Raised JPY 16,000,000 (USD 100,000) in funding.
+
+
+
+Nov 2020
+:   **Japan Mathematics A-lympiad Competition**
+    Developed a mathematical model to enhance the ski resort business.
+
 ## Projects
 
 See [Projects](projects/index.md).
@@ -45,3 +65,6 @@ Programming
 
 Tools
 :   ROS 2, Solidworks, KiCAD, 
+
+Expertise
+:   3D Reconstruction, Model-predictive Control, SLAM, Underwater Robotics, Sensor fusion
