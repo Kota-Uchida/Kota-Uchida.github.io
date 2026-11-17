@@ -5,7 +5,7 @@ title: CV
 
 # Curriculum Vitae
 
-[Download PDF](assets/Resume_20261028.pdf) · Last updated: Nov 2026
+[Download PDF](assets/Resume_20261118.pdf) · Last updated: Nov 2026
 { .pf-subtitle }
 
 ## Education
