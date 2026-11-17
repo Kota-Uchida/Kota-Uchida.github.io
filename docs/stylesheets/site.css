@@ -195,20 +195,56 @@ body {
 }
 
 .site-header__links a {
+  position: relative;
   display: block;
   padding: 0.25rem 0;
   font-size: 0.7rem; /* 14px */
   color: var(--pf-fg-2);
-  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Underline: grows out from the center on hover, stays full on the active tab */
+.site-header__links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--pf-accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  opacity: 0.6;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease;
 }
 
 .site-header__links a:hover {
   color: var(--pf-fg);
+  transform: translateY(-2px);
+}
+
+.site-header__links a:hover::after {
+  transform: scaleX(1);
 }
 
 .site-header__links a.is-active {
   color: var(--pf-fg);
-  border-bottom-color: var(--pf-accent);
+}
+
+.site-header__links a.is-active::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header__links a,
+  .site-header__links a::after {
+    transition: none;
+  }
+
+  .site-header__links a:hover {
+    transform: none;
+  }
 }
 
 .site-header__tools {
@@ -384,12 +420,17 @@ body {
 }
 
 .pf-intro--photo {
-  grid-template-columns: 1fr 7.5em;
+  grid-template-columns: 1fr auto;
   align-items: start;
 }
 
+.pf-intro__photos {
+  display: flex;
+  gap: 0.6em;
+}
+
 .pf-intro__photo {
-  width: 100%;
+  width: 10em;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: 3px;
@@ -593,6 +634,83 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+/* --- Home: mission statement (add `{ .pf-mission }` under a paragraph) --- */
+
+.md-typeset p.pf-mission {
+  position: relative;
+  margin: 1.6em 0 2em;
+  padding: 1.1em 1.4em 1.1em 1.6em;
+  font-family: var(--pf-font-serif);
+  font-size: 1.22em;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--pf-fg);
+  background: var(--pf-code-bg);
+  background: linear-gradient(
+    100deg,
+    color-mix(in srgb, var(--pf-accent) 12%, var(--pf-bg)),
+    var(--pf-bg) 85%
+  );
+  border-left: 4px solid var(--pf-accent);
+  border-radius: 0 6px 6px 0;
+}
+
+.md-typeset p.pf-mission::before {
+  content: "Mission";
+  display: block;
+  margin-bottom: 0.4em;
+  font-family: var(--pf-font-sans);
+  font-size: 0.55em;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pf-accent);
+}
+
+@media (max-width: 600px) {
+  .md-typeset p.pf-mission {
+    font-size: 1.08em;
+    padding: 0.9em 1em 0.9em 1.2em;
+  }
+}
+
+/* --- Home: favorite books --- */
+
+.md-typeset ul.pf-books {
+  margin: 0.6em 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.md-typeset ul.pf-books li.pf-book {
+  margin: 0 0 0.6em;
+}
+
+.pf-book__title {
+  font-weight: 600;
+}
+
+.md-typeset .pf-book__title a {
+  color: var(--pf-fg);
+  text-decoration-color: transparent;
+}
+
+.md-typeset .pf-book__title a:hover {
+  color: var(--pf-accent);
+  text-decoration-color: currentColor;
+}
+
+.pf-book__author {
+  color: var(--pf-fg-2);
+}
+
+.md-typeset .pf-book__note {
+  margin: 0.1em 0 0;
+  font-size: 0.9em;
+  color: var(--pf-fg-3);
+}
+
 /* --- Publications (year in a left gutter) --- */
 
 .pf-year {
@@ -785,8 +903,8 @@ body {
     gap: 0.9em;
   }
 
-  .pf-intro--photo {
-    grid-template-columns: 1fr 5.5em;
+  .pf-intro__photo {
+    width: 7em;
   }
 
   .pf-year {

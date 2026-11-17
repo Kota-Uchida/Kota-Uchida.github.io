@@ -47,12 +47,37 @@
       {{ pf.link_list(m.links) }}
     </div>
     {% if m.photo %}
-      <img class="pf-intro__photo" src="{{ pf.href(m.photo) }}"
-           alt="{{ m.name | d(config.site_name, true) | e }}" width="720" height="900">
+      <div class="pf-intro__photos">
+        <img class="pf-intro__photo" src="{{ pf.href(m.photo) }}"
+             alt="{{ m.name | d(config.site_name, true) | e }}" width="480" height="600">
+        {% if m.photo2 %}
+          <img class="pf-intro__photo" src="{{ pf.href(m.photo2) }}"
+               alt="{{ m.photo2_alt | d('', true) | e }}" width="480" height="600">
+        {% endif %}
+      </div>
     {% endif %}
   </header>
 
   {{ page.content }}
+
+  {% if m.favorite_books %}
+    <section class="pf-section" aria-labelledby="favorite-books">
+      <div class="pf-section__head">
+        <h2 id="favorite-books">Favorite books</h2>
+      </div>
+      <ul class="pf-books">
+        {% for b in m.favorite_books %}
+          <li class="pf-book">
+            <span class="pf-book__title">
+              {%- if b.url %}<a href="{{ pf.href(b.url) }}">{{ b.title | e }}</a>{% else %}{{ b.title | e }}{% endif -%}
+            </span>
+            {%- if b.author %} <span class="pf-book__author">by {{ b.author | e }}</span>{% endif %}
+            {% if b.note %}<p class="pf-book__note">{{ b.note | e }}</p>{% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
 
   {% set selected = ns.projects | selectattr("selected") | list %}
   {% if m.selected_projects != false and selected %}
