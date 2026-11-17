@@ -7,7 +7,7 @@ template: home.html
 title: Home
 
 name: Kota Uchida
-role: Robotics researcher and engineering student
+role: Senior undergraduate student at University of Tokyo
 affiliation: The University of Tokyo
 affiliation_url: https://www.u-tokyo.ac.jp/en/
 
