@@ -36,7 +36,10 @@
 
   <header class="pf-intro{{ ' pf-intro--photo' if m.photo else '' }}">
     <div class="pf-intro__text">
-      <h1 class="pf-intro__name">{{ m.name | d(config.site_name, true) | e }}</h1>
+      <h1 class="pf-intro__name">
+        {{- m.name | d(config.site_name, true) | e -}}
+        {%- if m.name_ja %}<span class="pf-intro__name-ja" lang="ja">{{ m.name_ja | e }}</span>{% endif -%}
+      </h1>
       {% if m.role %}<p class="pf-intro__role">{{ m.role | e }}</p>{% endif %}
       {% if m.affiliation %}
         <p class="pf-intro__affil">

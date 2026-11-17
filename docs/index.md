@@ -7,6 +7,8 @@ template: home.html
 title: Home
 
 name: Kota Uchida
+# Optional second line under the name (e.g. the name in Japanese).
+name_ja: 内田 康太
 role: Forth-year undergraduate (robotics)
 affiliation: The University of Tokyo
 affiliation_url: https://www.u-tokyo.ac.jp/en/

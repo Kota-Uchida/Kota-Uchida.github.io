@@ -441,6 +441,15 @@ body {
   font-size: 2.1em;
 }
 
+.md-typeset .pf-intro__name-ja {
+  display: block;
+  margin-top: 0.2em;
+  font-size: 0.55em;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--pf-fg-2);
+}
+
 .md-typeset .pf-intro__role,
 .md-typeset .pf-intro__affil {
   margin: 0;
