@@ -48,7 +48,7 @@ favorite_books:
     author: F. Scott Fitzgerald
     url: https://en.wikipedia.org/wiki/The_Great_Gatsby
   - title: Surely you're joking, Mr. Feynman!
-    author: Ralph leighton, Richard Feynman
+    author: Ralph Leighton, Richard Feynman
     url: https://en.wikipedia.org/wiki/Surely_You%27re_Joking,_Mr._Feynman!
 
 # Number of recent notes to list (notes need a `date` in their front matter).
