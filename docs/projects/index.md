@@ -16,47 +16,60 @@ template: projects.html
 title: Projects
 
 projects:
-  - title: Autonomous Underwater Vehicle
-    period: 2026 – present
+  - title: Acoustic Simulation for ocean survey
+    period: Nov 2026 - Feb 2027
     summary: >-
-      Placeholder entry. A small underwater vehicle used as a testbed for
-      depth and heading control, onboard sensing, and embedded software.
+      There are several open-source simulator for underwater acoustics, but not many of them can bridge AUV control and acoustic signal processing at the same time. The unique feature of our simulator is that it can funtion as a stand-alone acoustic simulator, and at the same time able to bridge to ROS2-based robot simulators.
+    thumbnail: assets/images/projects/placeholder.svg
+    tags: [Underwater Acoustics, Simulation, C++, CUDA]
+    page: projects/acoustic-simulation.md
+    selected: true
+
+  - title: Multi AUV operation 
+    period: Aug 2026 - Feb 2027
+    summary: >-
+      In order to accelerate the underwater survey, theoretically, it is very effective to use multiple AUVs at a time. This project aims to solve operational, communicational issues in multi-AUV system and to develop an user-friendly interface to operate AUV swarm. I'm responsible for everything from hardware design (Solidworks, KiCAD) to software (ROS2).
+    thumbnail: assets/images/projects/placeholder.svg
+    tags: [Marine robotics, Embedded system, Multi Agent]
+    page: projects/multi-auv.md
+    selected: true
+
+  - title: UUV-USV joint system
+    period: Feb 2026 – Jun 2026
+    summary: >-
+      UUV(Unmanned Underwater Vehicle) and USV(Unmanned Surface Vehicle) are connected via tether cable. This enables flexible teleoperation by adjusting the position of the cable.
     thumbnail: assets/images/projects/placeholder.svg
     tags: [Marine robotics, Embedded systems, Control]
     page: projects/autonomous-underwater-vehicle.md
-    selected: true
+    selected: false
 
-  - title: Fluid–Structure Interaction Simulation
-    period: 2026
+  - title: Robotani-Shohei
+    period: Nov 2025 - Dec 2025
     summary: >-
-      Placeholder entry. Coupled simulation of a flexible body in a viscous
-      flow, used to study how passive compliance changes the dynamics of
-      swimming and flapping structures.
+      Using a robot simulator "Drake", our team control the Kuka Iiwa robot to play baseball. Major techniques used were MPC (model predictive control), object detection with RGB-D, ball state estimation using RLS (Recursive Least Squares).
     thumbnail: assets/images/projects/placeholder.svg
-    tags: [Nonlinear dynamics, Simulation, Fluid mechanics]
-    page: projects/fsi-simulation.md
-    links:
-      - label: Notes
-        url: notes/simulation/ode-integrators.md
-    selected: true
+    tags: [Model predictive control, Computer vision]
+    page: projects/robotani-shohei.md
+    selected: false
 
-  - title: Underwater Acoustic Simulation
-    period: 2023
+  - title: Underwater 3D reconstruction using VGGT
+    period: Oct 2025 - Dec 2025
     summary: >-
-      Placeholder entry. Numerical models of sound propagation in shallow
-      water, intended for evaluating acoustic positioning and communication
-      for small underwater robots.
-    tags: [Acoustics, Simulation]
-
-  - title: Robotics Hardware Prototyping
-    period: 2022 – present
+      It is difficult to realize robust underwater 3D reconstruction underwater because of the attenuation of the specific frequency of light. This project aims to post-train VGGT using generated data from Infinigen, to enhance the reconstruction fidelity especially of underwater scenes.
+    thumbnail: assets/images/projects/placeholder.svg
+    tags: [3D reconstruction, Post training, Underwater SLAM]
+    page: projects/underwater-reconstruction-vggt.md
+    selected: false
+  
+  - title: CanSat (Software Development)
+    period: Jan 2025 - Mar 2025
     summary: >-
-      Placeholder entry. A collection of small mechanisms, actuator mounts,
-      and sensor boards built with 3D printing and rapid PCB fabrication.
-    tags: [Hardware, Mechanical design]
+      I joined a CanSat development team as a software member. Realtime state estimation algorithm using EKF (Extended Karman Filter) was developed with C++.
+    thumbnail: assets/images/projects/placeholder.svg
+    tags: [Extended Karman Filter, C++]
+    selected: false
 ---
 
 # Projects
 
-Research, engineering, and personal projects, most recent first.
-All entries below are placeholders: replace them in `docs/projects/index.md`.
+History of my pursuit in science and engineering through projects.

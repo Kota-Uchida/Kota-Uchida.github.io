@@ -5,7 +5,7 @@ back: { label: Projects, url: projects/index.md }
 
 # Autonomous Underwater Vehicle
 
-2024 – present · Marine robotics, Embedded systems, Control
+Feb 2026 – present · Marine robotics, Embedded systems, Control
 { .pf-subtitle }
 
 !!! note "Placeholder page"

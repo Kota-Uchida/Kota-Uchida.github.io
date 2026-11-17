@@ -12,13 +12,8 @@ affiliation: The University of Tokyo
 affiliation_url: https://www.u-tokyo.ac.jp/en/
 
 # Portrait (shown at a 4:5 ratio, e.g. 480×600 px JPEG under ~80 KB).
-# Put your photo in docs/assets/images/ and change the path below.
-# Delete the line to show no photo.
 photo: assets/images/portrait.jpg
 
-# Links under the name. Use full URLs, "mailto:" addresses, or site paths.
-# With `icon`, a link is shown as that icon (the label becomes its tooltip
-# and screen-reader name); without it, the label is shown as text.
 links:
   - label: CV
     url: cv.md
@@ -40,20 +35,18 @@ links:
 
 # Selected projects: entries marked `selected: true` in docs/projects/index.md.
 # Set to false to hide the section.
-selected_projects: false
+selected_projects: true
 
 # Number of recent notes to list (notes need a `date` in their front matter).
 # Set to false to hide the section.
 recent_notes: false
 ---
 
-I am interested in embodied intelligence, nonlinear dynamics, robotics, and the
-relationship between physical systems and computation. This site collects my
-projects, publications, and technical notes.
+My ultimate goal is to make a fully autonomous robot ship (underwater or in space) that enables decades of exploration. I'm interested both in underwater and aerospace technologies!
 
 ## Research interests
 
-- **Embodied intelligence:** how body, environment, and control together produce behavior
-- **Nonlinear dynamics:** fluid–structure interaction, underwater locomotion, and their simulation
-- **Robotics:** marine vehicles, hardware prototyping, and embedded control
-- **Physical computation:** using the dynamics of physical systems as a computational resource
+- **Underwater Robotics:** robots that explore extreme environment where human cannot step in.
+- **Embodied Intelligence:** the intelligent way of moving its body using rich interaction between brain, body, and environment.
+- **Nonlinear Dynamics:** mathematics to describe and analyze the dynamics in nature.
+

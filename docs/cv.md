@@ -8,13 +8,6 @@ title: CV
 [Download PDF](assets/Resume_20261028.pdf) · Last updated: Nov 2026
 { .pf-subtitle }
 
-<!--
-  To use your own PDF, replace docs/assets/cv.pdf (keep the file name, or
-  update the link above). The sections below use Markdown definition lists:
-  a line with the date, then a line starting with ":   " for the details.
-  A **bold phrase** at the start of an entry is shown as its title line.
--->
-
 ## Education
 
 Apr 2023 – present
@@ -40,15 +33,17 @@ Sep 2025 – Dec 2025
 
 ## Programs / Awards
 
-Feb 2026 - Mar 2026
-:   **Hongo Tech Garage Spring Founders Program**
-    Developed ROV and ASV prototypes. Raised JPY 300,000 (USD 1,800) in funding.
-
-Aug 2026 - Feb 2027
+Aug 2026 - Feb 2
 :   **IPA MITOU Advanced project**
     Developed multi-AUV operation system (including hardware, software, and acoustic simulation). Raised JPY 16,000,000 (USD 100,000) in funding.
 
+Sep 2026 - Dec 2026
+:   **NEXUS ORCA x StartX**
+    Joined as a co-founder of Kaitei Industries.
 
+Feb 2026 - Mar 2026
+:   **Hongo Tech Garage Spring Founders Program**
+    Developed ROV and ASV prototypes. Raised JPY 300,000 (USD 1,800) in funding.
 
 Nov 2020
 :   **Japan Mathematics A-lympiad Competition**

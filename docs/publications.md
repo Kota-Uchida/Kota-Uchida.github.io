@@ -31,7 +31,7 @@ title: Publications
 highlight_author: Kota Uchida
 
 # Shown while the list is empty.
-empty_message: No publications yet. This list will be updated as work is published.
+empty_message: No publications yet. 
 
 publications: []
 ---

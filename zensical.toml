@@ -11,15 +11,10 @@ site_name = "Kota Uchida"
 site_description = "Undergraduate student majoring robotics at the University of Tokyo."
 site_author = "Kota Uchida"
 
-# Full public URL of the site, including the repository subpath when the site
-# is served from https://<user>.github.io/<repo>/. Keep the trailing slash.
-site_url = "https://Kota-Uchida.github.io/your-repo/"
+site_url = "https://Kota-Uchida.github.io/"
 
 copyright = "© 2026 Kota Uchida"
 
-# Top-level entries become the links in the top navigation bar.
-# Sub-pages listed under a section appear in that section's sidebar (Notes)
-# and keep the section highlighted in the top bar.
 nav = [
   { "Home" = "index.md" },
   { "Projects" = [
@@ -28,18 +23,6 @@ nav = [
     "projects/fsi-simulation.md",
   ] },
   { "Publications" = "publications.md" },
-  { "Notes" = [
-    "notes/index.md",
-    { "Dynamics" = [
-      "notes/dynamics/rotation-representations.md",
-    ] },
-    { "Simulation" = [
-      "notes/simulation/ode-integrators.md",
-    ] },
-    { "Guides" = [
-      "notes/guides/writing-notes.md",
-    ] },
-  ] },
   { "CV" = "cv.md" },
 ]
 
